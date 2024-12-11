@@ -85,7 +85,8 @@ class ColumnTypes(TableMetricProvider):
             df.schema, include_nested=metric_value_kwargs["include_nested"]
         )
         return spark_column_metadata
-    
+
+
 def _get_normalized_table_name(table_name: str):
     return table_name.strip("[]").strip('"')
 
