@@ -7,6 +7,7 @@ from great_expectations.expectations.expectation import (
     ColumnAggregateExpectation,
     render_suite_parameter_string,
 )
+from great_expectations.expectations.metadata_types import DataQualityIssues
 from great_expectations.expectations.model_field_descriptions import (
     COLUMN_DESCRIPTION,
     VALUE_SET_DESCRIPTION,
@@ -50,12 +51,11 @@ SUPPORTED_DATA_SOURCES = [
     "PostgreSQL",
     "MySQL",
     "MSSQL",
-    "Redshift",
     "BigQuery",
     "Snowflake",
     "Databricks (SQL)",
 ]
-DATA_QUALITY_ISSUES = ["Sets"]
+DATA_QUALITY_ISSUES = [DataQualityIssues.UNIQUENESS.value]
 
 
 class ExpectColumnDistinctValuesToContainSet(ColumnAggregateExpectation):
@@ -94,7 +94,7 @@ class ExpectColumnDistinctValuesToContainSet(ColumnAggregateExpectation):
         [ExpectColumnDistinctValuesToBeInSet](https://greatexpectations.io/expectations/expect_column_distinct_values_to_be_in_set)
         [ExpectColumnDistinctValuesToEqualSet](https://greatexpectations.io/expectations/expect_column_distinct_values_to_equal_set)
 
-    Supported Datasources:
+    Supported Data Sources:
         [{SUPPORTED_DATA_SOURCES[0]}](https://docs.greatexpectations.io/docs/application_integration_support/)
         [{SUPPORTED_DATA_SOURCES[1]}](https://docs.greatexpectations.io/docs/application_integration_support/)
         [{SUPPORTED_DATA_SOURCES[2]}](https://docs.greatexpectations.io/docs/application_integration_support/)
@@ -105,7 +105,7 @@ class ExpectColumnDistinctValuesToContainSet(ColumnAggregateExpectation):
         [{SUPPORTED_DATA_SOURCES[7]}](https://docs.greatexpectations.io/docs/application_integration_support/)
         [{SUPPORTED_DATA_SOURCES[8]}](https://docs.greatexpectations.io/docs/application_integration_support/)
 
-    Data Quality Category:
+    Data Quality Issues:
         {DATA_QUALITY_ISSUES[0]}
 
     Example Data:
@@ -186,7 +186,7 @@ class ExpectColumnDistinctValuesToContainSet(ColumnAggregateExpectation):
                 "meta": {{}},
                 "success": false
                 }}
-    """  # noqa: E501
+    """  # noqa: E501 # FIXME CoP
 
     value_set: ValueSetField
 
@@ -202,7 +202,7 @@ class ExpectColumnDistinctValuesToContainSet(ColumnAggregateExpectation):
 
     _library_metadata = library_metadata
 
-    # Setting necessary computation metric dependencies and defining kwargs, as well as assigning kwargs default values\  # noqa: E501
+    # Setting necessary computation metric dependencies and defining kwargs, as well as assigning kwargs default values\  # noqa: E501 # FIXME CoP
     metric_dependencies = ("column.value_counts",)
     success_keys = ("value_set",)
 
@@ -298,7 +298,7 @@ class ExpectColumnDistinctValuesToContainSet(ColumnAggregateExpectation):
             runtime_configuration=runtime_configuration,
         )
         if renderer_configuration.configuration is None:
-            raise ValueError("renderer_configuration.configuration is None.")  # noqa: TRY003
+            raise ValueError("renderer_configuration.configuration is None.")  # noqa: TRY003 # FIXME CoP
         params = substitute_none_for_missing(
             renderer_configuration.configuration.kwargs,
             [
@@ -356,7 +356,7 @@ class ExpectColumnDistinctValuesToContainSet(ColumnAggregateExpectation):
         parsed_value_set = value_set
 
         if observed_value_counts is None:
-            raise ValueError("observed_value_counts None, but is required")  # noqa: TRY003
+            raise ValueError("observed_value_counts None, but is required")  # noqa: TRY003 # FIXME CoP
         observed_value_set = set(observed_value_counts.index)
         expected_value_set = set(parsed_value_set)
 

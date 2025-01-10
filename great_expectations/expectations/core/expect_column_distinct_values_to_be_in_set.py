@@ -9,6 +9,7 @@ from great_expectations.expectations.expectation import (
     ColumnAggregateExpectation,
     render_suite_parameter_string,
 )
+from great_expectations.expectations.metadata_types import DataQualityIssues
 from great_expectations.expectations.model_field_descriptions import (
     COLUMN_DESCRIPTION,
     VALUE_SET_DESCRIPTION,
@@ -58,12 +59,11 @@ SUPPORTED_DATA_SOURCES = [
     "PostgreSQL",
     "MySQL",
     "MSSQL",
-    "Redshift",
     "BigQuery",
     "Snowflake",
     "Databricks (SQL)",
 ]
-DATA_QUALITY_ISSUES = ["Sets"]
+DATA_QUALITY_ISSUES = [DataQualityIssues.UNIQUENESS.value]
 
 
 class ExpectColumnDistinctValuesToBeInSet(ColumnAggregateExpectation):
@@ -106,7 +106,7 @@ class ExpectColumnDistinctValuesToBeInSet(ColumnAggregateExpectation):
         [ExpectColumnDistinctValuesToContainSet](https://greatexpectations.io/expectations/expect_column_distinct_values_to_contain_set)
         [ExpectColumnDistinctValuesToEqualSet](https://greatexpectations.io/expectations/expect_column_distinct_values_to_equal_set)
 
-    Supported Datasources:
+    Supported Data Sources:
         [{SUPPORTED_DATA_SOURCES[0]}](https://docs.greatexpectations.io/docs/application_integration_support/)
         [{SUPPORTED_DATA_SOURCES[1]}](https://docs.greatexpectations.io/docs/application_integration_support/)
         [{SUPPORTED_DATA_SOURCES[2]}](https://docs.greatexpectations.io/docs/application_integration_support/)
@@ -115,9 +115,8 @@ class ExpectColumnDistinctValuesToBeInSet(ColumnAggregateExpectation):
         [{SUPPORTED_DATA_SOURCES[5]}](https://docs.greatexpectations.io/docs/application_integration_support/)
         [{SUPPORTED_DATA_SOURCES[6]}](https://docs.greatexpectations.io/docs/application_integration_support/)
         [{SUPPORTED_DATA_SOURCES[7]}](https://docs.greatexpectations.io/docs/application_integration_support/)
-        [{SUPPORTED_DATA_SOURCES[8]}](https://docs.greatexpectations.io/docs/application_integration_support/)
 
-    Data Quality Category:
+    Data Quality Issues:
         {DATA_QUALITY_ISSUES[0]}
 
     Example Data:
@@ -198,7 +197,7 @@ class ExpectColumnDistinctValuesToBeInSet(ColumnAggregateExpectation):
                   "meta": {{}},
                   "success": false
                 }}
-    """  # noqa: E501
+    """  # noqa: E501 # FIXME CoP
 
     value_set: ValueSetField
 
@@ -212,7 +211,7 @@ class ExpectColumnDistinctValuesToBeInSet(ColumnAggregateExpectation):
     }
     _library_metadata = library_metadata
 
-    # Setting necessary computation metric dependencies and defining kwargs, as well as assigning kwargs default values\  # noqa: E501
+    # Setting necessary computation metric dependencies and defining kwargs, as well as assigning kwargs default values\  # noqa: E501 # FIXME CoP
     metric_dependencies = ("column.value_counts",)
     success_keys = ("value_set",)
 
@@ -382,17 +381,17 @@ class ExpectColumnDistinctValuesToBeInSet(ColumnAggregateExpectation):
             }
         )
 
-        if len(values) > 60:  # noqa: PLR2004
+        if len(values) > 60:  # noqa: PLR2004 # FIXME CoP
             return None
         else:
             chart_pixel_width = (len(values) / 60.0) * 500
             chart_pixel_width = max(chart_pixel_width, 250)
             chart_container_col_width = round((len(values) / 60.0) * 6)
-            if chart_container_col_width < 4:  # noqa: PLR2004
+            if chart_container_col_width < 4:  # noqa: PLR2004 # FIXME CoP
                 chart_container_col_width = 4
-            elif chart_container_col_width >= 5:  # noqa: PLR2004
+            elif chart_container_col_width >= 5:  # noqa: PLR2004 # FIXME CoP
                 chart_container_col_width = 6
-            elif chart_container_col_width >= 4:  # noqa: PLR2004
+            elif chart_container_col_width >= 4:  # noqa: PLR2004 # FIXME CoP
                 chart_container_col_width = 5
 
         mark_bar_args = {}
