@@ -111,7 +111,7 @@ def _get_sqlalchemy_column_metadata(
     return get_sqlalchemy_column_metadata(
         execution_engine=execution_engine,
         table_selectable=_get_normalized_table_name(table_selectable),  # type: ignore[arg-type]
-        #table_selectable=table_selectable,  # type: ignore[arg-type] # FIXME CoP
+        # table_selectable=table_selectable,  # type: ignore[arg-type] # FIXME CoP
         schema_name=schema_name,
     )
 
